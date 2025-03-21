@@ -15,6 +15,11 @@ run/main_scene="uid://cwg14yq1omgle"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+shapes/navigation/geometry_edge_color=Color(0.501961, 0, 1, 1)
+shapes/navigation/geometry_face_color=Color(0.501961, 0, 1, 0.4)
+
 [input]
 
 forward={
