@@ -21,3 +21,7 @@ transform = Transform3D(0.0073699, 0.0145127, 0.0732125, -0.070633, 0.025129, 0.
 
 [node name="Dagger" parent="Camera/Hand" instance=ExtResource("3_i3pqv")]
 transform = Transform3D(0.0286784, 1.59737, 0.0871856, -0.33124, 0.0912388, -1.56268, -1.56507, 0.00995983, 0.332331, 0.814677, 0.395053, -0.125711)
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 1.0

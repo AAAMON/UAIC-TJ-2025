@@ -1,25 +1,22 @@
 extends Node
 
-var hp : int = 100
-var max_hp : int = 100
-var inventory : Array = []
-var equipped_weapon : String = ""
+var max_hp: int = 100
+var hp: int = max_hp
+var inventory: Dictionary[String, int] = {}
+var equipped_weapon: String = ""
 
-func add_to_inventory(item_id: String):
-	for i in inventory.size():
-		if inventory[i][0] == item_id:
-			inventory[i] = [item_id, inventory[i][1] + 1]
-			return
-	inventory.append([item_id, 1])
+func add_to_inventory(item_id: String, count: int=1):
+	if item_id in inventory:
+		inventory[item_id] += count
+	else:
+		inventory[item_id] = count
 
-func remove_from_inventory(item_id: String):
-	for i in inventory.size():
-		if inventory[i][0] == item_id:
-			if inventory[i][1] > 1:
-				inventory[i] = [item_id, inventory[i][1] - 1]
-			else:
-				inventory.remove_at(i)
-			return
+func remove_from_inventory(item_id: String, remove_stack: bool=true):
+	if item_id not in inventory: return
+	if remove_stack or inventory[item_id] == 1:
+		inventory.erase(item_id)
+	else:
+		inventory[item_id] -= 1
 
 func equip_weapon(weapon: String):
 	equipped_weapon = weapon
