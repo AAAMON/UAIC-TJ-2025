@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://buhfbux42xjs6"
-path="res://.godot/imported/hand_1.blend-0b6726f826272db8976d96e41eceb8c0.scn"
+uid="uid://bfcxlq3a0625l"
+path="res://.godot/imported/dagger_1.blend-182de7696a668abc953864001400526d.scn"
 
 [deps]
 
-source_file="res://assets/hand_1.blend"
-dest_files=["res://.godot/imported/hand_1.blend-0b6726f826272db8976d96e41eceb8c0.scn"]
+source_file="res://player/models/dagger_1.blend"
+dest_files=["res://.godot/imported/dagger_1.blend-182de7696a668abc953864001400526d.scn"]
 
 [params]
 

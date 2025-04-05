@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c470ocohyxrie"]
+
+[ext_resource type="Script" uid="uid://ypw5sf4d8hiq" path="res://player/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://du456exwxm7tu" path="res://player/models/hand_1.blend" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://bfcxlq3a0625l" path="res://player/models/dagger_1.blend" id="3_i3pqv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.50919, 0)
+
+[node name="Hand" parent="Camera" instance=ExtResource("2_onrkg")]
+transform = Transform3D(0.0073699, 0.0145127, 0.0732125, -0.070633, 0.025129, 0.00212897, -0.0241181, -0.0691585, 0.016137, 0.166832, -0.098129, -0.32358)
+
+[node name="Dagger" parent="Camera/Hand" instance=ExtResource("3_i3pqv")]
+transform = Transform3D(0.0286784, 1.59737, 0.0871856, -0.33124, 0.0912388, -1.56268, -1.56507, 0.00995983, 0.332331, 0.814677, 0.395053, -0.125711)
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 1.0
