@@ -13,7 +13,7 @@ script = ExtResource("1_7k104")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_4gyqm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["enemy"]]
 shape = SubResource("ConvexPolygonShape3D_qi2p4")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

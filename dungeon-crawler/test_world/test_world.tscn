@@ -33,7 +33,7 @@ shadow_enabled = true
 environment = SubResource("Environment_dsnr4")
 
 [node name="Player" parent="." instance=ExtResource("1_6bak2")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 20.5146, 1.83205, -0.828079)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 20.5146, 1.83205, -0.828079)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_gy3sr")
@@ -41,20 +41,20 @@ navigation_mesh = SubResource("NavigationMesh_gy3sr")
 [node name="Map" parent="NavigationRegion3D" instance=ExtResource("2_r3lko")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="Enemy" parent="." instance=ExtResource("3_civni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06, 1, -0.484)
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.06, 1, -0.484)
 
-[node name="Enemy2" parent="." instance=ExtResource("3_civni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.651, 1, -8.282)
+[node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 18.651, 1, -8.282)
 
-[node name="Enemy3" parent="." instance=ExtResource("3_civni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.706, 1, -2.985)
+[node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 19.706, 1, -2.985)
 
-[node name="Enemy4" parent="." instance=ExtResource("3_civni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.629, 1, -6.459)
+[node name="Enemy4" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 25.629, 1, -6.459)
 
-[node name="Enemy5" parent="." instance=ExtResource("3_civni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.858, 1, -2.847)
+[node name="Enemy5" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 23.858, 1, -2.847)
 collision_mask = 3
 
 [editable path="NavigationRegion3D/Map"]
