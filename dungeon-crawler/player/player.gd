@@ -12,9 +12,8 @@ const DECELERATION = 15.0
 # ATTACK #######################################################################
 var is_attacking = false
 
-
-
-
+var hp: int = global.hp
+var max_hp: int = global.max_hp
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -69,3 +68,15 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_dagger_hitbox_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemy"):
 		print("Hit something!")
+		
+func take_damage(amount: int) -> void:
+	hp = max(hp - amount, 0) 
+	if hp == 0:
+		die() 
+
+func heal(amount: int) -> void:
+	hp = min(hp + amount, max_hp)  
+
+func die() -> void:
+	print("Player has died.")
+	queue_free()  

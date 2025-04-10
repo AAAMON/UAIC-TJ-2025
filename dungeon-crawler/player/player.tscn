@@ -52,45 +52,6 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_yw30f"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera/HandPivot/Hand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.02839, 1.35385, -1.22899)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera/HandPivot/Hand:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.166832, -0.098129, -0.32358)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera/HandPivot:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_qjkh3"]
 resource_name = "PrimaryAttack"
 length = 0.4
@@ -131,6 +92,45 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, -1.36464, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_yw30f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/HandPivot/Hand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.02839, 1.35385, -1.22899)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/HandPivot/Hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.166832, -0.098129, -0.32358)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/HandPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
 _data = {
 &"Idle": SubResource("Animation_g1dw6"),
@@ -151,7 +151,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.50919, 0)
 [node name="HandPivot" type="Node3D" parent="Camera"]
 
 [node name="Hand" parent="Camera/HandPivot" instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.019653, 0.0387006, 0.195233, -0.188354, 0.0670105, 0.00567725, -0.0643148, -0.184423, 0.0430319, 0.166832, -0.098129, -0.32358)
+transform = Transform3D(0.0196532, 0.038701, 0.195233, -0.188354, 0.0670109, 0.00567723, -0.0643151, -0.184423, 0.0430323, 0.166832, -0.098129, -0.32358)
 
 [node name="Dagger" parent="Camera/HandPivot/Hand" instance=ExtResource("3_i3pqv")]
 transform = Transform3D(0.0286784, 1.59737, 0.0871856, -0.33124, 0.0912388, -1.56268, -1.56507, 0.00995983, 0.332331, 0.814677, 0.395053, -0.125711)

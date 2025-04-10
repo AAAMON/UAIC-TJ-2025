@@ -6,12 +6,16 @@ class_name Enemy
 
 @export var max_radius := 10.0
 @export var movement_speed := 3
+@export var max_hp := 100
+@export var damage :int = 10 
 
+var hp := max_hp
 var curr_target := Vector3.ZERO
 
 func _ready():
 	await NavigationServer3D.map_changed
 	pick_random_destination()
+
 
 func _physics_process(_delta: float) -> void:
 	if nav_agent.is_navigation_finished(): return
@@ -19,6 +23,7 @@ func _physics_process(_delta: float) -> void:
 		curr_target = nav_agent.get_next_path_position()
 	var direction := global_position.direction_to(curr_target)
 	nav_agent.velocity = direction * movement_speed
+
 
 func pick_random_destination():
 	var nav_map: RID = nav_agent.get_navigation_map()
@@ -37,3 +42,9 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
 	move_and_slide()
+	
+	
+
+
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	hp = hp - 5
