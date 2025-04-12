@@ -41,7 +41,54 @@ navigation_mesh = SubResource("NavigationMesh_gy3sr")
 [node name="Map" parent="NavigationRegion3D" instance=ExtResource("2_r3lko")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06, 0.976458, -0.484)
+wandering_max_radius = null
+max_hp = null
+damage = null
+movement_speed_when_not_aggro = null
+lookaround_max_count = null
+aggro_tick_interval = null
+
+[node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.651, 0.976458, -8.282)
+wandering_max_radius = null
+max_hp = null
+damage = null
+movement_speed_when_not_aggro = null
+lookaround_max_count = null
+lookaround_max_duration = null
+aggro_tick_interval = null
+
 [node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.706, 0.976458, -2.985)
+wandering_max_radius = null
+max_hp = null
+damage = null
+movement_speed_when_not_aggro = null
+lookaround_max_count = null
+lookaround_max_duration = null
+aggro_tick_interval = null
+
+[node name="Enemy4" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.629, 0.976458, -6.459)
+wandering_max_radius = null
+max_hp = null
+damage = null
+movement_speed_when_not_aggro = null
+lookaround_max_count = null
+lookaround_max_duration = null
+aggro_tick_interval = null
+
+[node name="Enemy5" parent="." groups=["enemy"] instance=ExtResource("3_civni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.858, 0.976458, -2.847)
+collision_mask = 3
+wandering_max_radius = null
+max_hp = null
+damage = null
+movement_speed_when_not_aggro = null
+lookaround_max_count = null
+lookaround_max_duration = null
+aggro_tick_interval = null
 
 [editable path="NavigationRegion3D/Map"]

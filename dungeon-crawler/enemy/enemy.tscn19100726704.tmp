@@ -10,7 +10,13 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_7k104")
-lookaround_max_duration = 6.0
+wandering_max_radius = null
+max_hp = null
+damage = null
+movement_speed_when_not_aggro = null
+lookaround_max_count = null
+lookaround_max_time = null
+aggro_tick_interval = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_4gyqm")

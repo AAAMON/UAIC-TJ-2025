@@ -1,4 +1,6 @@
 extends CharacterBody3D
+class_name Player
+
 @onready var camera = $Camera
 @onready var anim_player = $AnimationPlayer
 @onready var dagger_hitbox = $Camera/HandPivot/Hand/Dagger/DaggerHitbox
@@ -16,8 +18,14 @@ var hp: int = global.hp
 var max_hp: int = global.max_hp
 
 func _ready() -> void:
+	add_to_group("players")
+	Utils.update_player_group(get_tree())
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
+func _exit_tree() -> void:
+	remove_from_group("players")
+	Utils.update_player_group(get_tree())
+
 # move view with mouse
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -44,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	__apply_gravity(delta)
 	
 	# jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept"):# and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
 	# move
