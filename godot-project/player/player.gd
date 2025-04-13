@@ -87,12 +87,13 @@ func _on_dagger_hitbox_body_entered(body: Node3D) -> void:
 		print("Hit something!")
 		# so it can't register another hit until the anim is done
 		can_attack = false 
-	# change this so smth calculated
-	body.take_damage(2)
+		# change this so smth calculated
+		body.take_damage(2)
 		
 func take_damage(amount: int) -> void:
-	hp = max(hp - amount, 0) 
-	if hp == 0:
+	print("Player took ", amount, " damage!")
+	hp = hp - amount
+	if hp <= 0:
 		die() 
 
 #func heal(amount: int) -> void:

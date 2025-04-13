@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var player_path := "/root/TestWorld/Player"
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var attack_cooldown = $AttackCooldown
 
 const SPEED = 1.0
 const MAX_HP = 10
@@ -11,12 +12,14 @@ var player = null
 var aggro = false
 var downed = false
 var hp
+var can_attack = true
 
 # Random movelemt
 var random_target: Vector3 = Vector3.ZERO
 var random_move_time = 0.0
 var random_move_interval = 3.0 # Time interval between random movements
 var random_move_radius = 10.0 # Radius for random movement
+
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 	
@@ -49,6 +52,12 @@ func _physics_process(delta: float) -> void:
 	if distance_to_player > 15.0:
 		aggro = false
 	
+	# attack
+	if distance_to_player <= 3.0 and can_attack == true:
+		player.take_damage(1)
+		can_attack = false
+		attack_cooldown.start()
+	
 	if aggro == true:
 		# Navigation
 		nav_agent.set_target_position(player.global_transform.origin)
@@ -79,3 +88,7 @@ func _physics_process(delta: float) -> void:
 		look_at(Vector3(random_target.x, global_position.y, random_target.z), Vector3.UP)
 	
 	move_and_slide()
+
+
+func _on_attack_cooldown_timeout() -> void:
+	can_attack = true

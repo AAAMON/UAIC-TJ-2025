@@ -110,3 +110,7 @@ transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 
 [node name="Mesh" type="MeshInstance3D" parent="Belly"]
 mesh = SubResource("ArrayMesh_vc4p4")
 skeleton = NodePath("")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
