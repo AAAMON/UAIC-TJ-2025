@@ -5,9 +5,12 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 
 const SPEED = 1.0
+const MAX_HP = 10
 
 var player = null
 var aggro = false
+var downed = false
+var hp
 
 # Random movelemt
 var random_target: Vector3 = Vector3.ZERO
@@ -15,12 +18,13 @@ var random_move_time = 0.0
 var random_move_interval = 3.0 # Time interval between random movements
 var random_move_radius = 10.0 # Radius for random movement
 
-var gravity = -9.8 # Gravity constant (adjust as needed)
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 	
 
 func _ready() -> void:
 	player = get_node(player_path)
 	velocity = Vector3.ZERO
+	hp = MAX_HP
 
 func __apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -62,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		var next_nav_point = nav_agent.get_next_path_position()
 		velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
 		
-		# Optionally, look in the direction of the random target
+		# look in the direction of the random target
 		look_at(Vector3(random_target.x, global_position.y, random_target.z), Vector3.UP)
 	
 	move_and_slide()

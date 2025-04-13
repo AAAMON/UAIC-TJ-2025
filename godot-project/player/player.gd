@@ -5,22 +5,25 @@ class_name Player
 @onready var anim_player = $AnimationPlayer
 @onready var dagger_hitbox = $Camera/HandPivot/Hand/Dagger/DaggerHitbox
 
-# MOVEMENT #####################################################################
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+const MAX_HP = 50
 const MOVEMENT_SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const ACCELERATION = 15.0
 const DECELERATION = 15.0
-# ATTACK #######################################################################
-var is_attacking = false
 
-var hp: int = global.hp
-var max_hp: int = global.max_hp
+var is_attacking = false
+var can_attack = false
+var hp
+
 
 func _ready() -> void:
 	add_to_group("players")
 	Utils.update_player_group(get_tree())
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	hp = MAX_HP
 
 func _exit_tree() -> void:
 	remove_from_group("players")
@@ -71,20 +74,22 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "PrimaryAttack":
 		anim_player.play("Idle")
 		dagger_hitbox.monitoring = false
+	can_attack = true
 
 
 func _on_dagger_hitbox_body_entered(body: Node3D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("enemy") and can_attack == true:
 		print("Hit something!")
+		can_attack = false # so it can't register another hit until the anim is done
 		
 func take_damage(amount: int) -> void:
 	hp = max(hp - amount, 0) 
 	if hp == 0:
 		die() 
 
-func heal(amount: int) -> void:
-	hp = min(hp + amount, max_hp)  
+#func heal(amount: int) -> void:
+	#hp = min(hp + amount, max_hp)  
 
 func die() -> void:
 	print("Player has died.")
-	queue_free()  
+	#queue_free()  
