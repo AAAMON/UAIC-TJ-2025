@@ -119,10 +119,10 @@ shape = SubResource("ConcavePolygonShape3D_6bak2")
 [node name="Spawns" type="Node3D" parent="World"]
 
 [node name="E1S1" type="Node3D" parent="World/Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.8421, 1.98018, -17.4091)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.8421, 5.47333, -17.4091)
 
 [node name="E1S2" type="Node3D" parent="World/Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9159, 1.75188, -18.0754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9159, 4.46051, -18.0754)
 
 [node name="SpawnTimers" type="Node3D" parent="World"]
 
@@ -130,7 +130,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9159, 1.75188, -18.0754)
 wait_time = 8.0
 autostart = true
 
+[node name="E2" type="Timer" parent="World/SpawnTimers"]
+wait_time = 5.0
+autostart = true
+
 [node name="Player" parent="." instance=ExtResource("1_6bak2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.54, 4.05581, -13.6437)
 
 [connection signal="timeout" from="World/SpawnTimers/E1" to="." method="_on_e_1_timeout"]
+[connection signal="timeout" from="World/SpawnTimers/E2" to="." method="_on_e_2_timeout"]

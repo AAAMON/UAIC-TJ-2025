@@ -7,6 +7,7 @@ extends Node3D
 @onready var navigation_reg = $World/NavigationRegion3D
 
 var enemy_1 = load("res://enemy/enemy_1/enemy_1.tscn")
+var enemy_2 = load("res://enemy/enemy_2/enemy_2.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,5 +31,11 @@ func _get_random_child(parent_node):
 func _on_e_1_timeout() -> void:
 	var spawn_point = _get_random_child(enemy_spawns).global_position
 	var instance = enemy_1.instantiate()
+	instance.position = spawn_point
+	navigation_reg.add_child(instance)
+
+func _on_e_2_timeout() -> void:
+	var spawn_point = _get_random_child(enemy_spawns).global_position
+	var instance = enemy_2.instantiate()
 	instance.position = spawn_point
 	navigation_reg.add_child(instance)
