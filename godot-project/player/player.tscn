@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c470ocohyxrie"]
+[gd_scene load_steps=12 format=3 uid="uid://c470ocohyxrie"]
 
 [ext_resource type="Script" uid="uid://ypw5sf4d8hiq" path="res://player/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://du456exwxm7tu" path="res://player/models/hand_1.blend" id="2_onrkg"]
@@ -131,11 +131,93 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_g6k8r"]
+resource_name = "SecondaryAttack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/HandPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector3(0, -0.809833, 0), Vector3(-0.756902, -1.48308, 1.44341)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/HandPivot/Hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.425664, 0.513448, -0.47717)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/HandPivot/Hand:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0975785, 2.40402, -0.222556)]
+}
+
+[sub_resource type="Animation" id="Animation_boad6"]
+resource_name = "TertiaryAttack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/HandPivot/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.512313, -0.520212, -0.145775), Vector3(-0.840382, -0.520212, -0.5991)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/HandPivot/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector3(-1.50995, 2.71902, -0.616971), Vector3(-1.50995, 2.64407, -0.616971)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/HandPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.809833, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
 _data = {
 &"Idle": SubResource("Animation_g1dw6"),
 &"PrimaryAttack": SubResource("Animation_qjkh3"),
-&"RESET": SubResource("Animation_yw30f")
+&"RESET": SubResource("Animation_yw30f"),
+&"SecondaryAttack": SubResource("Animation_g6k8r"),
+&"TertiaryAttack": SubResource("Animation_boad6")
 }
 
 [node name="Player" type="CharacterBody3D"]
@@ -149,9 +231,10 @@ shape = SubResource("CapsuleShape3D_sh265")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50919, 0)
 
 [node name="HandPivot" type="Node3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Hand" parent="Camera/HandPivot" instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.0196532, 0.038701, 0.195233, -0.188354, 0.067011, 0.00567723, -0.0643151, -0.184423, 0.0430323, 0.166832, -0.098129, -0.32358)
+transform = Transform3D(0.0196532, 0.038701, 0.195233, -0.188354, 0.067011, 0.00567724, -0.0643151, -0.184423, 0.0430324, 0.166832, -0.098129, -0.32358)
 
 [node name="Dagger" parent="Camera/HandPivot/Hand" instance=ExtResource("3_i3pqv")]
 transform = Transform3D(0.0286784, 1.59737, 0.0871856, -0.33124, 0.0912388, -1.56268, -1.56507, 0.00995983, 0.332331, 0.814677, 0.395053, -0.125711)

@@ -6,17 +6,16 @@ class_name Player
 @onready var dagger_hitbox = $Camera/HandPivot/Hand/Dagger/DaggerHitbox
 
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 const MAX_HP = 50
 const MOVEMENT_SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const ACCELERATION = 15.0
 const DECELERATION = 15.0
 
-var is_attacking = false
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var can_attack = false
 var hp
+
 
 
 func _ready() -> void:
@@ -45,6 +44,12 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("primary_attack"):
 		anim_player.play("PrimaryAttack")
 		dagger_hitbox.monitoring = true
+	if Input.is_action_just_pressed("secondary_attack"):
+		anim_player.play("SecondaryAttack")
+		dagger_hitbox.monitoring = true
+	if Input.is_action_just_pressed("tertiary_attack"):
+		anim_player.play("TertiaryAttack")
+		dagger_hitbox.monitoring = true
 	
 
 func __apply_gravity(delta: float) -> void:
@@ -71,7 +76,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "PrimaryAttack":
+	if anim_name == "PrimaryAttack" or anim_name == "SecondaryAttack" or anim_name == "TertiaryAttack":
 		anim_player.play("Idle")
 		dagger_hitbox.monitoring = false
 	can_attack = true
@@ -80,7 +85,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_dagger_hitbox_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemy") and can_attack == true:
 		print("Hit something!")
-		can_attack = false # so it can't register another hit until the anim is done
+		# so it can't register another hit until the anim is done
+		can_attack = false 
 		
 func take_damage(amount: int) -> void:
 	hp = max(hp - amount, 0) 

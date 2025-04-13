@@ -127,7 +127,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9159, 1.75188, -18.0754)
 [node name="SpawnTimers" type="Node3D" parent="World"]
 
 [node name="E1" type="Timer" parent="World/SpawnTimers"]
-wait_time = 5.0
+wait_time = 8.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_6bak2")]
