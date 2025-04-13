@@ -13,7 +13,6 @@ config_version=5
 config/name="Dungeon Crawler"
 run/main_scene="uid://cwg14yq1omgle"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 

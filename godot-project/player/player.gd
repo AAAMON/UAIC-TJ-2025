@@ -7,9 +7,9 @@ class_name Player
 
 # MOVEMENT #####################################################################
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-const MOVEMENT_SPEED = 3.0
+const MOVEMENT_SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-const ACCELERATION = 10.0
+const ACCELERATION = 15.0
 const DECELERATION = 15.0
 # ATTACK #######################################################################
 var is_attacking = false

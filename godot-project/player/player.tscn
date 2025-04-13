@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bfcxlq3a0625l" path="res://player/models/dagger_1.blend" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
-height = 3.07582
+height = 2.08099
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1dw6"]
 radius = 0.193275
@@ -142,11 +142,11 @@ _data = {
 script = ExtResource("1_4flbx")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457061, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62761, 0)
 shape = SubResource("CapsuleShape3D_sh265")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.50919, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50919, 0)
 
 [node name="HandPivot" type="Node3D" parent="Camera"]
 
@@ -162,11 +162,6 @@ monitoring = false
 [node name="Collision" type="CollisionShape3D" parent="Camera/HandPivot/Hand/Dagger/DaggerHitbox"]
 transform = Transform3D(0.999992, -0.00356234, -0.00142965, 0.00356232, 0.999992, 9.4533e-05, 0.00142931, -9.97186e-05, 0.999998, 0.00557405, 0.610127, -0.00803423)
 shape = SubResource("CapsuleShape3D_g1dw6")
-
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-radius = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
