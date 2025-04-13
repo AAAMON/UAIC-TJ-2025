@@ -21,6 +21,10 @@ var random_move_radius = 10.0 # Radius for random movement
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 	
 
+func take_damage(value: int):
+	hp = hp - value
+	print("Enemy took ", value, " damage!")
+
 func _ready() -> void:
 	player = get_node(player_path)
 	velocity = Vector3.ZERO
@@ -29,6 +33,11 @@ func _ready() -> void:
 func __apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+
+func _process(delta: float) -> void:
+	if hp <= 0:
+		print("Enemy died!")
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	__apply_gravity(delta)

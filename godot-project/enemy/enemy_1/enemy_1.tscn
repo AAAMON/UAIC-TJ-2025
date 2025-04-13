@@ -89,7 +89,7 @@ shadow_mesh = SubResource("ArrayMesh_r3m4e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.680753, 0)
 script = ExtResource("1_vc4p4")
 
-[node name="WorldCollision" type="CollisionShape3D" parent="." groups=["enemy"]]
+[node name="WorldCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0.0038445, -0.300016)
 shape = SubResource("CapsuleShape3D_wdldj")
 
