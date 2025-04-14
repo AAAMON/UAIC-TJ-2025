@@ -30,17 +30,21 @@ func _exit_tree() -> void:
 
 # move view with mouse
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and captured:
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(camera.rotation.x, -(PI/2), (PI/3))
 
-
+var captured := true
 # Input alea alea ##############################################################
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
-	
+
+	if Input.is_action_just_pressed("capture_or_release_mouse"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if captured else Input.MOUSE_MODE_CAPTURED)
+		captured = not captured
+
 	if Input.is_action_just_pressed("primary_attack"):
 		anim_player.play("PrimaryAttack")
 		dagger_hitbox.monitoring = true
