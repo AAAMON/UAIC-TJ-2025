@@ -1,0 +1,26 @@
+[gd_resource type="BehaviorTree" load_steps=9 format=3 uid="uid://d12rgks2wj7rf"]
+
+[ext_resource type="Script" uid="uid://dm1bcpupnejyo" path="res://ai/tasks/conditions/has_closest_player_in_sight.gd" id="1_bgs0y"]
+[ext_resource type="Script" uid="uid://o666urhgoooa" path="res://ai/tasks/actions/navigate_to_target_position_and_look_ahead.gd" id="2_bgs0y"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_o3pv7"]
+
+[sub_resource type="BTCondition" id="BTCondition_xoplw"]
+script = ExtResource("1_bgs0y")
+
+[sub_resource type="BTInvert" id="BTInvert_6yflr"]
+children = [SubResource("BTCondition_xoplw")]
+
+[sub_resource type="BTAction" id="BTAction_tbw0t"]
+script = ExtResource("2_bgs0y")
+speed = &"speed"
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_a3mx7"]
+children = [SubResource("BTInvert_6yflr"), SubResource("BTAction_tbw0t")]
+
+[sub_resource type="BTInvert" id="BTInvert_f0oo3"]
+children = [SubResource("BTDynamicSequence_a3mx7")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_o3pv7")
+root_task = SubResource("BTInvert_f0oo3")

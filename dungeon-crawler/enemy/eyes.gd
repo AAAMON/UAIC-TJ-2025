@@ -15,7 +15,7 @@ var _fov: float = 5 * PI / 12
 		_fov = value
 		mesh_instance.mesh = fov_mesh()
 @export_range(0, 1000, 1, "suffix:m", "exp") var detection_radius := 5.0
-@export_range(1, 5, 1) var sight_movement_speed := 2
+@export var sight_movement_speed := MovementSpeedData.new(2, 5)
 
 @onready var mesh_instance := $MeshInstance3D
 
@@ -54,4 +54,7 @@ func _ready() -> void:
 	mesh_instance.mesh = fov_mesh()
 
 func _physics_process(delta: float) -> void:
-	center_of_FOV = center_of_FOV.slerp(target_center_of_FOV, delta * sight_movement_speed)
+	center_of_FOV = center_of_FOV.slerp(
+		target_center_of_FOV,
+		delta * (sight_movement_speed.wander if $"../State Machine".get_active_state() != $"../State Machine/Aggro'd" else sight_movement_speed.aggro) #TODO: make it so the sate machine controls these vars
+	)

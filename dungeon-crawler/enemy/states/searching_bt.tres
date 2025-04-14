@@ -1,0 +1,62 @@
+[gd_resource type="BehaviorTree" load_steps=17 format=3 uid="uid://cjm8fmjnwbhep"]
+
+[ext_resource type="Script" uid="uid://dm1bcpupnejyo" path="res://ai/tasks/conditions/has_closest_player_in_sight.gd" id="1_hpf7w"]
+[ext_resource type="Script" uid="uid://bc1k85mjhfhcb" path="res://ai/tasks/waits/var_wait_tick.gd" id="2_f50ua"]
+[ext_resource type="Script" uid="uid://dqdfcv0lpvpip" path="res://ai/tasks/data_processing/break_lookaround_data_segment.gd" id="3_hpf7w"]
+[ext_resource type="Script" uid="uid://djdvnec4eqjrp" path="res://ai/tasks/actions/look_towards.gd" id="4_hpf7w"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_78jik"]
+var/element/name = &"element"
+var/element/type = 24
+var/element/hint = 17
+var/element/hint_string = ""
+var/array/name = &"array"
+var/array/type = 28
+var/array/value = []
+var/array/hint = 0
+var/array/hint_string = ""
+
+[sub_resource type="BTCondition" id="BTCondition_f50ua"]
+script = ExtResource("1_hpf7w")
+
+[sub_resource type="BTInvert" id="BTInvert_nah5t"]
+children = [SubResource("BTCondition_f50ua")]
+
+[sub_resource type="BTWaitTicks" id="BTWaitTicks_nah5t"]
+script = ExtResource("2_f50ua")
+actual_ticks = &"initial_duration"
+
+[sub_resource type="BTAction" id="BTAction_dy0ep"]
+script = ExtResource("3_hpf7w")
+from = &"element"
+duration = &"duration"
+direction = &"direction"
+
+[sub_resource type="BTAction" id="BTAction_hpf7w"]
+script = ExtResource("4_hpf7w")
+target = &"direction"
+
+[sub_resource type="BTWaitTicks" id="BTWaitTicks_pnopo"]
+script = ExtResource("2_f50ua")
+actual_ticks = &"duration"
+
+[sub_resource type="BTSequence" id="BTSequence_jdkim"]
+children = [SubResource("BTAction_dy0ep"), SubResource("BTAction_hpf7w"), SubResource("BTWaitTicks_pnopo")]
+
+[sub_resource type="BTForEach" id="BTForEach_hpf7w"]
+array_var = &"array"
+save_var = &"element"
+children = [SubResource("BTSequence_jdkim")]
+
+[sub_resource type="BTSequence" id="BTSequence_pnopo"]
+children = [SubResource("BTWaitTicks_nah5t"), SubResource("BTForEach_hpf7w")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_jdkim"]
+children = [SubResource("BTInvert_nah5t"), SubResource("BTSequence_pnopo")]
+
+[sub_resource type="BTInvert" id="BTInvert_ve0ox"]
+children = [SubResource("BTDynamicSequence_jdkim")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_78jik")
+root_task = SubResource("BTInvert_ve0ox")

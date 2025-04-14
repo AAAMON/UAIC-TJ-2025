@@ -1,0 +1,149 @@
+[gd_resource type="BehaviorTree" load_steps=48 format=3 uid="uid://dmbflxsm3kny8"]
+
+[ext_resource type="Script" uid="uid://dm1bcpupnejyo" path="res://ai/tasks/conditions/has_closest_player_in_sight.gd" id="1_arivi"]
+[ext_resource type="Script" uid="uid://djdvnec4eqjrp" path="res://ai/tasks/actions/look_towards.gd" id="2_arivi"]
+[ext_resource type="Script" uid="uid://den8gh8svu186" path="res://ai/tasks/actions/dash_to_target_position.gd" id="5_3nete"]
+[ext_resource type="Script" uid="uid://3d33dcfq3uw4" path="res://ai/tasks/conditions/is_in_melee_range_to.gd" id="5_7bile"]
+[ext_resource type="Script" uid="uid://jxy11re6at74" path="res://ai/tasks/actions/set_navigation_target_to.gd" id="5_arivi"]
+[ext_resource type="Script" uid="uid://widquimpks13" path="res://ai/tasks/conditions/is_in_dashing_range_to.gd" id="5_x1kv1"]
+[ext_resource type="Script" uid="uid://cqea38detkgkl" path="res://ai/tasks/actions/stop_moving.gd" id="6_3nete"]
+[ext_resource type="Script" uid="uid://lc2iu3wx8ed2" path="res://ai/tasks/cooldowns/var_cooldown.gd" id="6_7bile"]
+[ext_resource type="Script" uid="uid://b5d2pcw44d0cg" path="res://ai/tasks/actions/navigate_to_target_position.gd" id="6_arivi"]
+[ext_resource type="Script" uid="uid://d22m473cns4gy" path="res://ai/tasks/conditions/can_dash_to.gd" id="6_st7vj"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_pirgj"]
+
+[sub_resource type="BTCondition" id="BTCondition_oeckb"]
+script = ExtResource("1_arivi")
+
+[sub_resource type="BTAction" id="BTAction_7bile"]
+script = ExtResource("2_arivi")
+target = &"position_of_closest_player_in_sight"
+
+[sub_resource type="BTCondition" id="BTCondition_3nete"]
+script = ExtResource("5_7bile")
+target = &"position_of_closest_player_in_sight"
+
+[sub_resource type="BTComment" id="BTComment_arivi"]
+custom_name = "this is where the attack logic is supposed to be; replace the comment or add the attack logic besides it"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_yfxw4"]
+text = "attack"
+
+[sub_resource type="BTCooldown" id="BTCooldown_3nete"]
+children = [SubResource("BTComment_arivi"), SubResource("BTConsolePrint_yfxw4")]
+script = ExtResource("6_7bile")
+actual_duration = &"melee_cooldown_duration"
+
+[sub_resource type="BTSequence" id="BTSequence_sg75p"]
+children = [SubResource("BTCondition_3nete"), SubResource("BTCooldown_3nete")]
+metadata/_weight_ = 2.0
+
+[sub_resource type="BTComment" id="BTComment_7bile"]
+custom_name = "this is a mock attack"
+
+[sub_resource type="BTCondition" id="BTCondition_x1kv1"]
+script = ExtResource("5_7bile")
+target = &"position_of_closest_player_in_sight"
+
+[sub_resource type="BTInvert" id="BTInvert_st7vj"]
+children = [SubResource("BTCondition_x1kv1")]
+
+[sub_resource type="BTCondition" id="BTCondition_st7vj"]
+script = ExtResource("5_x1kv1")
+target = &"position_of_closest_player_in_sight"
+
+[sub_resource type="BTCondition" id="BTCondition_34tfo"]
+script = ExtResource("6_st7vj")
+target = &"position_of_closest_player_in_sight"
+max_angle = null
+
+[sub_resource type="BTComment" id="BTComment_st7vj"]
+custom_name = "agent stops mid-dash if it can't see a player; TODO: decide if this behaviour is intended, pray if it isn't"
+
+[sub_resource type="BTAction" id="BTAction_st7vj"]
+script = ExtResource("6_3nete")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_34tfo"]
+text = "charging dash"
+_enabled = false
+
+[sub_resource type="BTAction" id="BTAction_34tfo"]
+script = ExtResource("5_arivi")
+target = &"position_of_closest_player_in_sight"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_st7vj"]
+text = "started dashing"
+_enabled = false
+
+[sub_resource type="BTAction" id="BTAction_x1kv1"]
+script = ExtResource("5_3nete")
+speed = &"speed"
+dash_speed_modifier = 10
+dash_duration_in_ticks = 30
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_3puwg"]
+text = "dash attack"
+
+[sub_resource type="BTSequence" id="BTSequence_3puwg"]
+children = [SubResource("BTAction_34tfo"), SubResource("BTConsolePrint_st7vj"), SubResource("BTAction_x1kv1"), SubResource("BTConsolePrint_3puwg")]
+
+[sub_resource type="BTDelay" id="BTDelay_3puwg"]
+seconds = 2.0
+children = [SubResource("BTSequence_3puwg")]
+
+[sub_resource type="BTAction" id="BTAction_3puwg"]
+script = ExtResource("5_arivi")
+target = &"position_of_self"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_5gj83"]
+text = "finished dashing"
+_enabled = false
+
+[sub_resource type="BTSequence" id="BTSequence_34tfo"]
+children = [SubResource("BTComment_st7vj"), SubResource("BTAction_st7vj"), SubResource("BTConsolePrint_34tfo"), SubResource("BTDelay_3puwg"), SubResource("BTAction_3puwg"), SubResource("BTConsolePrint_5gj83")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_3puwg"]
+duration = 3.0
+children = [SubResource("BTSequence_34tfo")]
+
+[sub_resource type="BTSequence" id="BTSequence_m2x11"]
+children = [SubResource("BTComment_7bile"), SubResource("BTInvert_st7vj"), SubResource("BTCondition_st7vj"), SubResource("BTCondition_34tfo"), SubResource("BTCooldown_3puwg")]
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_7b0uk"]
+children = [SubResource("BTSequence_sg75p"), SubResource("BTSequence_m2x11")]
+
+[sub_resource type="BTAction" id="BTAction_6a1u6"]
+script = ExtResource("5_arivi")
+target = &"position_of_closest_player_in_sight"
+
+[sub_resource type="BTCooldown" id="BTCooldown_arivi"]
+children = [SubResource("BTAction_6a1u6")]
+script = ExtResource("6_7bile")
+actual_duration = &"aggro_path_recalculation_cooldown_duration"
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_b48y5"]
+children = [SubResource("BTCooldown_arivi")]
+
+[sub_resource type="BTAction" id="BTAction_2qss6"]
+script = ExtResource("6_arivi")
+speed = &"speed"
+
+[sub_resource type="BTSequence" id="BTSequence_suxnf"]
+children = [SubResource("BTAlwaysSucceed_b48y5"), SubResource("BTAction_2qss6")]
+
+[sub_resource type="BTSelector" id="BTSelector_6j7cw"]
+children = [SubResource("BTProbabilitySelector_7b0uk"), SubResource("BTSequence_suxnf")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_usi77"]
+children = [SubResource("BTCondition_oeckb"), SubResource("BTAction_7bile"), SubResource("BTSelector_6j7cw")]
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_xua2s"]
+children = [SubResource("BTDynamicSequence_usi77")]
+
+[sub_resource type="BTInvert" id="BTInvert_qe0mn"]
+children = [SubResource("BTRepeatUntilFailure_xua2s")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_pirgj")
+root_task = SubResource("BTInvert_qe0mn")

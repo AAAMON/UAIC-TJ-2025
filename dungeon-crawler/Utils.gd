@@ -20,9 +20,19 @@ static func max(arr: Array, transform: Callable):
 			max_until_now = e
 	return max_until_now
 
+static func sliding_window(arr: Array, transform: Callable, size: int=2):
+	var result := []
+	for i in arr.size() - size + 1:
+		result.append(transform.call(arr[i], arr[i + 1], arr[i + 2]))
+	return result
+
+static func identity(x): return x
+
 static var _players: Array[Player]= []
 static var players: Array[Player]:
 	get: return _players
 
 static func update_player_group(tree: SceneTree) -> void:
 	_players.assign(tree.get_nodes_in_group("players"))
+
+static func bb_var(n: StringName): return n if n else &"\"\""
