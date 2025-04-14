@@ -12,6 +12,7 @@ var hp := max_hp
 @export var damage := 10
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var melee_cooldown_duration := 2.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var melee_attack_range := 2.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var duration_of_pause_after_melee_attack := 2.0
 
 @export var movement_speed := MovementSpeedData.new(2, 3)
 @export var aggro_path_recalculation_cooldown_duration := 0.33
@@ -19,7 +20,11 @@ var hp := max_hp
 func _ready():
 	if NavigationServer3D.get_maps().size() == 0:
 		await NavigationServer3D.map_changed
+	add_to_group("enemies")
 	state_machine.set_active(true)
+
+func _exit_tree() -> void:
+	remove_from_group("enemies")
 
 func can_see(p: Player) -> bool:
 	return (

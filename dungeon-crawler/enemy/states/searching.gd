@@ -18,7 +18,6 @@ func _ready() -> void:
 	failure_event = event_assoc_to[$"../Wandering"]
 
 func _enter() -> void:
-	#print("searching")
 	# VERY MUCH WIP
 	var generate_lookaround := func():
 		var count := randi_range(1, lookaround_max_count)
@@ -34,6 +33,3 @@ func _enter() -> void:
 	blackboard.set_var(&"initial_duration", lookaround.initial_duration)
 	blackboard.set_var(&"array", lookaround.subseq)
 	blackboard.bind_var_to_property(&"speed", agent.movement_speed, "wander", true)#TODO: make it so the sate machine controls these vars
-	#print(lookaround.initial_duration)
-	#for p in lookaround.subseq:
-		#print("\t{duration}, {direction}".format({"duration": p.duration, "direction": p.direction}))

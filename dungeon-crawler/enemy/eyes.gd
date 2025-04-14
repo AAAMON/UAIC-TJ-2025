@@ -1,12 +1,17 @@
 extends Node3D
 class_name Eyes
 
+@onready var enemy: Enemy = $".."
+
 var _center_of_FOV := Vector3.FORWARD
 var center_of_FOV := Vector3.FORWARD:
 	get(): return _center_of_FOV
 	set(value):
 		_center_of_FOV = value
 		global_transform.basis = Basis.looking_at(center_of_FOV)
+		var without_y = center_of_FOV
+		without_y.y = 0
+		enemy.global_transform.basis = Basis.looking_at(without_y)
 var target_center_of_FOV := Vector3.FORWARD
 var _fov: float = 5 * PI / 12
 @export_range(0, 180, 1, "radians_as_degrees") var field_of_view:

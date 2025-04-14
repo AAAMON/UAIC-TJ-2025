@@ -9,6 +9,5 @@ func _ready() -> void:
 	failure_event = event_assoc_to[$"../Searching"]
 
 func _enter() -> void:
-	#print("wander")
 	blackboard.bind_var_to_property(&"speed", agent.movement_speed, "wander", true)#TODO: make it so the sate machine controls these vars
 	agent.pick_random_destination()

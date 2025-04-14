@@ -43,10 +43,12 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kaehg")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oqwlf"]
-radius = 0.750737
+radius = 1.29
 height = 4.59221
 
 [node name="Enemy" instance=ExtResource("1_514le")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.318, 0)
+melee_attack_range = 5.0
 
 [node name="Mesh" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
 transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, 0, 0)
@@ -54,8 +56,15 @@ mesh = SubResource("ArrayMesh_hjf5e")
 skeleton = NodePath("")
 
 [node name="NavigationAgent3D" parent="." index="1"]
-radius = 0.5
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+height = 2.6
+radius = 2.3
+debug_enabled = true
 
 [node name="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.141765, 0.9899, 0, -0.9899, 0.141765, 0, 0.403618, 0.120849)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0156651, 0.0940756)
 shape = SubResource("CapsuleShape3D_oqwlf")
+
+[node name="Eyes" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790074, -1.76559)

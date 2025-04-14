@@ -7,13 +7,6 @@ func _ready() -> void:
 	failure_event = event_assoc_to[$"../Going where player was last seen"]
 
 func _enter() -> void:
-	#print("aggro")
-	blackboard.bind_var_to_property(
-		"closest_player_in_sight_opt", agent, &"closest_player_in_sight", true
-	)
-	blackboard.bind_var_to_property(
-		"closest_player_in_sight", agent, &"closest_player_in_sight_unwrapped", true
-	)
 	blackboard.bind_var_to_property(
 		"position_of_closest_player_in_sight", agent,
 		&"position_of_closest_player_in_sight", true
@@ -21,6 +14,10 @@ func _enter() -> void:
 	blackboard.bind_var_to_property(
 		"melee_cooldown_duration", agent,
 		&"melee_cooldown_duration", true
+	)
+	blackboard.bind_var_to_property(
+		"duration_of_pause_after_melee_attack", agent,
+		&"duration_of_pause_after_melee_attack", true
 	)
 	blackboard.bind_var_to_property(
 		"aggro_path_recalculation_cooldown_duration", agent,
