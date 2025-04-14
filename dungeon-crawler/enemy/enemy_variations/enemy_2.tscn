@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://bg0sh1jpld38u"]
+[gd_scene load_steps=6 format=4 uid="uid://4qwc4d518cyr"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wdldj"]
-radius = 3.01567
-height = 10.365
+[ext_resource type="PackedScene" uid="uid://dlxlr7368qhjs" path="res://enemy/enemy.tscn" id="1_514le"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g87y8"]
 resource_name = "BaseMat"
@@ -25,7 +23,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_uen6k"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_hjf5e"]
 resource_name = "enemy_2_Cube_001"
 _surfaces = [{
 "aabb": AABB(-1.22793, -2.18929, -3.93687, 2.45586, 4.30256, 7.45873),
@@ -44,27 +42,20 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kaehg")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uen6k"]
-radius = 0.660139
-height = 4.27396
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oqwlf"]
+radius = 0.750737
+height = 4.59221
 
-[node name="Enemy1" type="CharacterBody3D" groups=["enemy"]]
+[node name="Enemy" instance=ExtResource("1_514le")]
 
-[node name="CollisionLegs" type="CollisionShape3D" parent="."]
-transform = Transform3D(-0.3, -2.62268e-08, 1.14641e-15, 0, -1.31134e-08, -0.3, 2.62268e-08, -0.3, 1.31134e-08, 0, -0.426585, -0.569312)
-shape = SubResource("CapsuleShape3D_wdldj")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[node name="AttackCooldown" type="Timer" parent="."]
-
-[node name="Mesh" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
 transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, 0, 0)
-mesh = SubResource("ArrayMesh_uen6k")
+mesh = SubResource("ArrayMesh_hjf5e")
 skeleton = NodePath("")
 
-[node name="CollisionBody" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0.567615, 0)
-shape = SubResource("CapsuleShape3D_uen6k")
+[node name="NavigationAgent3D" parent="." index="1"]
+radius = 0.5
 
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[node name="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.141765, 0.9899, 0, -0.9899, 0.141765, 0, 0.403618, 0.120849)
+shape = SubResource("CapsuleShape3D_oqwlf")

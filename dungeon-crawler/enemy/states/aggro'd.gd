@@ -9,7 +9,10 @@ func _ready() -> void:
 func _enter() -> void:
 	#print("aggro")
 	blackboard.bind_var_to_property(
-		"closest_player_in_sight", agent, &"closest_player_in_sight", true
+		"closest_player_in_sight_opt", agent, &"closest_player_in_sight", true
+	)
+	blackboard.bind_var_to_property(
+		"closest_player_in_sight", agent, &"closest_player_in_sight_unwrapped", true
 	)
 	blackboard.bind_var_to_property(
 		"position_of_closest_player_in_sight", agent,

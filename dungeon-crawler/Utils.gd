@@ -35,4 +35,14 @@ static var players: Array[Player]:
 static func update_player_group(tree: SceneTree) -> void:
 	_players.assign(tree.get_nodes_in_group("players"))
 
+static func rand_choice(arr: Array):
+	return arr[randi() % arr.size()]
+
+static func gravity_application(self_: CharacterBody3D, delta: float) -> Vector3:
+	return Vector3(0, gravity_horizontal_modification(self_, delta), 0)
+
+static var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+static func gravity_horizontal_modification(self_: CharacterBody3D, delta: float) -> float:
+	return -_gravity * delta if not self_.is_on_floor() else 0
+
 static func bb_var(n: StringName): return n if n else &"\"\""

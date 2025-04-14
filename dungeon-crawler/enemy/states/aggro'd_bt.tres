@@ -1,7 +1,8 @@
-[gd_resource type="BehaviorTree" load_steps=48 format=3 uid="uid://dmbflxsm3kny8"]
+[gd_resource type="BehaviorTree" load_steps=50 format=3 uid="uid://dmbflxsm3kny8"]
 
 [ext_resource type="Script" uid="uid://dm1bcpupnejyo" path="res://ai/tasks/conditions/has_closest_player_in_sight.gd" id="1_arivi"]
 [ext_resource type="Script" uid="uid://djdvnec4eqjrp" path="res://ai/tasks/actions/look_towards.gd" id="2_arivi"]
+[ext_resource type="Script" uid="uid://cmqowsjtwo38o" path="res://ai/tasks/actions/call_method_of.gd" id="4_34tfo"]
 [ext_resource type="Script" uid="uid://den8gh8svu186" path="res://ai/tasks/actions/dash_to_target_position.gd" id="5_3nete"]
 [ext_resource type="Script" uid="uid://3d33dcfq3uw4" path="res://ai/tasks/conditions/is_in_melee_range_to.gd" id="5_7bile"]
 [ext_resource type="Script" uid="uid://jxy11re6at74" path="res://ai/tasks/actions/set_navigation_target_to.gd" id="5_arivi"]
@@ -27,11 +28,18 @@ target = &"position_of_closest_player_in_sight"
 [sub_resource type="BTComment" id="BTComment_arivi"]
 custom_name = "this is where the attack logic is supposed to be; replace the comment or add the attack logic besides it"
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_yfxw4"]
-text = "attack"
+[sub_resource type="BTAction" id="BTAction_5gj83"]
+_enabled = false
+script = ExtResource("4_34tfo")
+target = &"closest_player_in_sight_unwrapped"
+method = &"take_damage"
+arg = 5
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_m2x11"]
+text = "simple melee attack"
 
 [sub_resource type="BTCooldown" id="BTCooldown_3nete"]
-children = [SubResource("BTComment_arivi"), SubResource("BTConsolePrint_yfxw4")]
+children = [SubResource("BTComment_arivi"), SubResource("BTAction_5gj83"), SubResource("BTConsolePrint_m2x11")]
 script = ExtResource("6_7bile")
 actual_duration = &"melee_cooldown_duration"
 
@@ -56,7 +64,7 @@ target = &"position_of_closest_player_in_sight"
 [sub_resource type="BTCondition" id="BTCondition_34tfo"]
 script = ExtResource("6_st7vj")
 target = &"position_of_closest_player_in_sight"
-max_angle = null
+max_angle = 0.523599
 
 [sub_resource type="BTComment" id="BTComment_st7vj"]
 custom_name = "agent stops mid-dash if it can't see a player; TODO: decide if this behaviour is intended, pray if it isn't"

@@ -2,7 +2,6 @@ extends CharacterBody3D
 class_name Enemy
 
 @onready var nav_agent := $NavigationAgent3D
-@onready var timer := $Timer
 @onready var eyes := $Eyes
 @onready var state_machine := $"State Machine"
 
@@ -18,7 +17,8 @@ var hp := max_hp
 @export var aggro_path_recalculation_cooldown_duration := 0.33
 
 func _ready():
-	await NavigationServer3D.map_changed
+	if NavigationServer3D.get_maps().size() == 0:
+		await NavigationServer3D.map_changed
 	state_machine.set_active(true)
 
 func can_see(p: Player) -> bool:
@@ -33,6 +33,8 @@ func can_see(p: Player) -> bool:
 var _closest_player_in_sight: Option = Option.None()
 var closest_player_in_sight: Option:
 	get(): return _closest_player_in_sight
+var closest_player_in_sight_unwrapped: Player:
+	get(): return closest_player_in_sight.unwrap()
 var _position_of_closest_player_in_sight: Vector3
 var position_of_closest_player_in_sight: Vector3:
 	get(): return _position_of_closest_player_in_sight
@@ -48,6 +50,10 @@ func update_closest_player_in_sight() -> void:
 		_position_of_closest_player_in_sight = closest_player_in_sight.unwrap().global_position
 
 func _process(_delta: float) -> void:
+	if hp <= 0:
+		print("enemy died :(")
+		queue_free()
+		return
 	var seen := Utils.players.filter(can_see)
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -55,8 +61,12 @@ func _process(_delta: float) -> void:
 	material.albedo_color = Color(0, 0, 1) if seen.size() > 0 else Color(0, 1, 0)
 	eyes.mesh_instance.set_surface_override_material(0, material)
 
-func _physics_process(_delta: float) -> void:
+var _last_physics_process_delta: float
+var last_physics_process_delta: float:
+	get(): return _last_physics_process_delta
+func _physics_process(delta: float) -> void:
 	update_closest_player_in_sight()
+	_last_physics_process_delta = delta
 
 func pick_random_destination():
 	var nav_map: RID = nav_agent.get_navigation_map()
@@ -64,11 +74,16 @@ func pick_random_destination():
 	var random_point := origin + Utils.random_pos_in_sphere(wandering_max_radius)
 	nav_agent.target_position = NavigationServer3D.map_get_closest_point(nav_map, random_point)
 
+func __apply_gravity():
+	if not is_on_floor():
+		velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * last_physics_process_delta
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
+	velocity.y += Utils.gravity_horizontal_modification(self, last_physics_process_delta)
 	move_and_slide()
 
 
-func _on_hitbox_area_entered(area: Area3D) -> void:
-	hp -= 5
+func take_damage(value: int):
+	hp = hp - value
+	print("Enemy took ", value, " damage!")

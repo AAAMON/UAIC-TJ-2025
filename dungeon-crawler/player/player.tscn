@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c470ocohyxrie"]
 
-[ext_resource type="Script" uid="uid://ypw5sf4d8hiq" path="res://player/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://ypw5sf4d8hiq" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://du456exwxm7tu" path="res://player/models/hand_1.blend" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://bfcxlq3a0625l" path="res://player/models/dagger_1.blend" id="3_i3pqv"]
 
@@ -231,10 +231,9 @@ shape = SubResource("CapsuleShape3D_sh265")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50919, 0)
 
 [node name="HandPivot" type="Node3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Hand" parent="Camera/HandPivot" instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.0196532, 0.038701, 0.195233, -0.188354, 0.067011, 0.00567724, -0.0643151, -0.184423, 0.0430324, 0.166832, -0.098129, -0.32358)
+transform = Transform3D(0.0196532, 0.038701, 0.195233, -0.188354, 0.067011, 0.00567723, -0.0643151, -0.184423, 0.0430323, 0.166832, -0.098129, -0.32358)
 
 [node name="Dagger" parent="Camera/HandPivot/Hand" instance=ExtResource("3_i3pqv")]
 transform = Transform3D(0.0286784, 1.59737, 0.0871856, -0.33124, 0.0912388, -1.56268, -1.56507, 0.00995983, 0.332331, 0.814677, 0.395053, -0.125711)
