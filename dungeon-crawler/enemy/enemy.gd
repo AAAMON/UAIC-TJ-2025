@@ -7,11 +7,11 @@ class_name Enemy
 
 @export var wandering_max_radius := 10.0
 
-@export var max_hp := 100
+@export var max_hp := 10
 var hp := max_hp
 @export var damage := 10
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var melee_cooldown_duration := 2.0
-@export_custom(PROPERTY_HINT_NONE, "suffix:m") var melee_attack_range := 2.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var melee_attack_range := 4.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var duration_of_pause_after_melee_attack := 2.0
 
 @export var movement_speed := MovementSpeedData.new(2, 3)

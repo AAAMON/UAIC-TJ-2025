@@ -4,6 +4,9 @@ class_name Player
 @onready var camera = $Camera
 @onready var anim_player = $AnimationPlayer
 @onready var dagger_hitbox = $Camera/HandPivot/Hand/Dagger/DaggerHitbox
+@onready var sword_hitbox = $Camera/HandPivot/HandTwo1/sword_1/SwordHitbox
+@onready var hand1 = $Camera/HandPivot/Hand
+@onready var hand2 = $Camera/HandPivot/HandTwo1
 
 
 const MAX_HP = 50
@@ -15,6 +18,7 @@ const DECELERATION = 15.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var can_attack = false
 var hp
+var weapon = 1
 
 
 
@@ -44,15 +48,34 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("capture_or_release_mouse"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if captured else Input.MOUSE_MODE_CAPTURED)
 		captured = not captured
+	
+	if Input.is_action_just_pressed("Weapon1"):
+		weapon = 1
+		hand1.show()
+		hand2.hide()
+		
+	if Input.is_action_just_pressed("Weapon2"):
+		weapon = 2
+		hand2.show()
+		hand1.hide()
 
 	if Input.is_action_just_pressed("primary_attack"):
-		anim_player.play("PrimaryAttack")
+		if weapon == 1:
+			anim_player.play("PrimaryAttack")
+		else:
+			anim_player.play("PrimaryAttack2")
 		dagger_hitbox.monitoring = true
 	if Input.is_action_just_pressed("secondary_attack"):
-		anim_player.play("SecondaryAttack")
+		if weapon == 1:
+			anim_player.play("SecondaryAttack")
+		else:
+			anim_player.play("SecondaryAttack2")
 		dagger_hitbox.monitoring = true
 	if Input.is_action_just_pressed("tertiary_attack"):
-		anim_player.play("TertiaryAttack")
+		if weapon == 1:
+			anim_player.play("TertiaryAttack")
+		else:
+			anim_player.play("TertiaryAttack2")
 		dagger_hitbox.monitoring = true
 
 
@@ -79,6 +102,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "PrimaryAttack" or anim_name == "SecondaryAttack" or anim_name == "TertiaryAttack":
 		anim_player.play("Idle")
 		dagger_hitbox.monitoring = false
+	if anim_name == "PrimaryAttack2" or anim_name == "SecondaryAttack2" or anim_name == "TertiaryAttack2":
+		anim_player.play("Idle2")
+		dagger_hitbox.monitoring = false
 	can_attack = true
 
 
@@ -100,3 +126,10 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 	print("Player has died.")
 	#queue_free()  
+
+
+func _on_sword_hitbox_body_entered(body: Node3D) -> void:
+	if body.is_in_group("enemies") and can_attack == true:
+		can_attack = false 
+		# change this so smth calculated
+		body.take_damage(5)
