@@ -57,6 +57,47 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_hg6s5"]
+resource_name = "Idle2"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/HandPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/HandPivot/HandTwo1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.44),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0279253, 1.35438, -1.22871), Vector3(0.0110068, 1.35288, -1.05273)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/HandPivot/HandTwo1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.44),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.338, -0.175, -0.684), Vector3(0.338, -0.343383, -0.684)]
+}
+
 [sub_resource type="Animation" id="Animation_qjkh3"]
 resource_name = "PrimaryAttack"
 length = 0.4
@@ -95,6 +136,46 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -1.36464, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rgyib"]
+resource_name = "PrimaryAttack2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/HandPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, -0.182666, 0), Vector3(0, 1.88087, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/HandPivot/HandTwo1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.338, -0.408293, -0.684)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/HandPivot/HandTwo1:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.74889, 2.60767, 0.0450109)]
 }
 
 [sub_resource type="Animation" id="Animation_yw30f"]
@@ -200,127 +281,6 @@ tracks/2/keys = {
 "values": [Vector3(0.0975785, 2.40402, -0.222556)]
 }
 
-[sub_resource type="Animation" id="Animation_boad6"]
-resource_name = "TertiaryAttack"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera/HandPivot/Hand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.512313, -0.520212, -0.145775), Vector3(-0.840382, -0.520212, -0.5991)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera/HandPivot/Hand:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, -2),
-"update": 0,
-"values": [Vector3(-1.50995, 2.71902, -0.616971), Vector3(-1.50995, 2.64407, -0.616971)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera/HandPivot:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.809833, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_rgyib"]
-resource_name = "PrimaryAttack2"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera/HandPivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector3(0, -0.182666, 0), Vector3(0, 1.88087, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera/HandPivot/HandTwo1:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.338, -0.408293, -0.684)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera/HandPivot/HandTwo1:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.74889, 2.60767, 0.0450109)]
-}
-
-[sub_resource type="Animation" id="Animation_hg6s5"]
-resource_name = "Idle2"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera/HandPivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(-2),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera/HandPivot/HandTwo1:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.44),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.0279253, 1.35438, -1.22871), Vector3(0.0110068, 1.35288, -1.05273)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera/HandPivot/HandTwo1:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.44),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.338, -0.175, -0.684), Vector3(0.338, -0.343383, -0.684)]
-}
-
 [sub_resource type="Animation" id="Animation_8t03j"]
 resource_name = "SecondaryAttack2"
 length = 0.6
@@ -359,6 +319,46 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_boad6"]
+resource_name = "TertiaryAttack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/HandPivot/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.512313, -0.520212, -0.145775), Vector3(-0.840382, -0.520212, -0.5991)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/HandPivot/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector3(-1.50995, 2.71902, -0.616971), Vector3(-1.50995, 2.64407, -0.616971)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/HandPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.809833, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_2ieo8"]
@@ -440,7 +440,7 @@ transform = Transform3D(0.999992, -0.00356234, -0.00142965, 0.00356232, 0.999992
 shape = SubResource("CapsuleShape3D_g1dw6")
 
 [node name="HandTwo1" parent="Camera/HandPivot" instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.0195447, 0.038629, 0.195258, -0.188338, 0.0670642, 0.00558433, -0.0643956, -0.184419, 0.0429303, 0.338, -0.175, -0.684)
+transform = Transform3D(0.0195445, 0.0386283, 0.195258, -0.188338, 0.0670646, 0.00558433, -0.064396, -0.184419, 0.0429294, 0.338, -0.175, -0.684)
 visible = false
 
 [node name="sword_1" parent="Camera/HandPivot/HandTwo1" instance=ExtResource("4_yw30f")]

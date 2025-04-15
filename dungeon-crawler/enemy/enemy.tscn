@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlxlr7368qhjs"]
+[gd_scene load_steps=16 format=3 uid="uid://dlxlr7368qhjs"]
 
 [ext_resource type="Script" uid="uid://b6fynl4rtj0cw" path="res://enemy/enemy.gd" id="1_7k104"]
+[ext_resource type="PackedScene" uid="uid://dn5a25l2gtcj" path="res://items/item.tscn" id="2_o3pv7"]
 [ext_resource type="Script" uid="uid://05fk03bg50n2" path="res://enemy/eyes.gd" id="2_ofsxj"]
 [ext_resource type="Script" uid="uid://dqnfntklr6vn" path="res://enemy/state_machine.gd" id="3_ppra6"]
 [ext_resource type="BehaviorTree" uid="uid://d12rgks2wj7rf" path="res://enemy/states/wandering_and_going_where_player_was_last_seem_bt.tres" id="4_78jik"]
@@ -21,6 +22,7 @@
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_7k104")
+drop_item = ExtResource("2_o3pv7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 

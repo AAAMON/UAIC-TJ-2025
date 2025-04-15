@@ -17,6 +17,9 @@ var hp := max_hp
 @export var movement_speed := MovementSpeedData.new(2, 3)
 @export var aggro_path_recalculation_cooldown_duration := 0.33
 
+@export var drop_item: PackedScene
+
+
 func _ready():
 	if NavigationServer3D.get_maps().size() == 0:
 		await NavigationServer3D.map_changed
@@ -56,8 +59,8 @@ func update_closest_player_in_sight() -> void:
 
 func _process(_delta: float) -> void:
 	if hp <= 0:
-		print("enemy died :(")
-		queue_free()
+		print("enemy died :)")
+		die()
 		return
 	var seen := Utils.players.filter(can_see)
 	var material := StandardMaterial3D.new()
@@ -65,6 +68,13 @@ func _process(_delta: float) -> void:
 	material.vertex_color_use_as_albedo = true
 	material.albedo_color = Color(0, 0, 1) if seen.size() > 0 else Color(0, 1, 0)
 	eyes.mesh_instance.set_surface_override_material(0, material)
+	
+func die():
+	if drop_item:
+		var dropped = drop_item.instantiate()
+		dropped.global_position = global_position
+		get_parent().add_child(dropped)
+	queue_free()
 
 var _last_physics_process_delta: float
 var last_physics_process_delta: float:
