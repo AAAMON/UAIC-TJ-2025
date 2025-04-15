@@ -60,14 +60,15 @@ metadata/_custom_type_script = "uid://cdgga0bt7f735"
 [node name="SpawnTimers" type="Node3D" parent="."]
 
 [node name="E1" type="Timer" parent="SpawnTimers"]
-wait_time = 24.0
+one_shot = true
 autostart = true
 script = ExtResource("5_kaadm")
 to_instantiate = ExtResource("6_7cb7q")
 metadata/_custom_type_script = "uid://clfgfp1d8s4b7"
 
 [node name="E2" type="Timer" parent="SpawnTimers"]
-wait_time = 15.0
+wait_time = 7.0
+one_shot = true
 autostart = true
 script = ExtResource("5_kaadm")
 to_instantiate = ExtResource("7_cen2t")

@@ -22,6 +22,8 @@
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_7k104")
+melee_cooldown_duration = 2.0
+duration_of_pause_after_melee_attack = 2.0
 drop_item = ExtResource("2_o3pv7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

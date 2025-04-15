@@ -5,17 +5,29 @@ class_name Enemy
 @onready var eyes := $Eyes
 @onready var state_machine := $"State Machine"
 
-@export var wandering_max_radius := 10.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var wandering_max_radius := 10.0
 
 @export var max_hp := 10
 var hp := max_hp
 @export var damage := 10
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var melee_cooldown_duration := 2.0
-@export_custom(PROPERTY_HINT_NONE, "suffix:m") var melee_attack_range := 4.0
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var duration_of_pause_after_melee_attack := 2.0
+var _melee_cooldown_duration_after_pause := 2.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var melee_cooldown_duration: float:
+	get(): return _melee_cooldown_duration_after_pause + duration_of_pause_after_melee_attack
+	set(value):
+		_melee_cooldown_duration_after_pause = clampf(value - duration_of_pause_after_melee_attack, 0, 9999)
+var _duration_of_pause_after_melee_attack := 2.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var duration_of_pause_after_melee_attack: float:
+	get(): return _duration_of_pause_after_melee_attack
+	set(value):
+		_duration_of_pause_after_melee_attack = value
+		melee_cooldown_duration = melee_cooldown_duration
+
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var melee_attack_range := 2.0
+var melee_attack_range_with_nav_agent_radius: float:
+	get(): return melee_attack_range + nav_agent.radius
 
 @export var movement_speed := MovementSpeedData.new(2, 3)
-@export var aggro_path_recalculation_cooldown_duration := 0.33
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var aggro_path_recalculation_cooldown_duration := 0.33
 
 @export var drop_item: PackedScene
 
@@ -31,7 +43,7 @@ func _exit_tree() -> void:
 
 func can_see(p: Player) -> bool:
 	return (
-		global_position.distance_to(p.global_position) <= eyes.detection_radius
+		eyes.global_position.distance_to(p.global_position) <= eyes.detection_radius
 			and
 		eyes.center_of_FOV.angle_to(
 			global_position.direction_to(p.global_position)
@@ -41,8 +53,6 @@ func can_see(p: Player) -> bool:
 var _closest_player_in_sight: Option = Option.None()
 var closest_player_in_sight: Option:
 	get(): return _closest_player_in_sight
-var closest_player_in_sight_unwrapped: Player:
-	get(): return closest_player_in_sight.unwrap()
 var _position_of_closest_player_in_sight: Vector3
 var position_of_closest_player_in_sight: Vector3:
 	get(): return _position_of_closest_player_in_sight
@@ -62,11 +72,10 @@ func _process(_delta: float) -> void:
 		print("enemy died :)")
 		die()
 		return
-	var seen := Utils.players.filter(can_see)
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.vertex_color_use_as_albedo = true
-	material.albedo_color = Color(0, 0, 1) if seen.size() > 0 else Color(0, 1, 0)
+	material.albedo_color = Color(0, 0, 1) if closest_player_in_sight.is_some() else Color(0, 1, 0)
 	eyes.mesh_instance.set_surface_override_material(0, material)
 	
 func die():

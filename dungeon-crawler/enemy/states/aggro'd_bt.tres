@@ -1,11 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=28 format=3 uid="uid://dmbflxsm3kny8"]
+[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://dmbflxsm3kny8"]
 
 [ext_resource type="Script" uid="uid://dm1bcpupnejyo" path="res://ai/tasks/conditions/has_closest_player_in_sight.gd" id="1_arivi"]
 [ext_resource type="Script" uid="uid://djdvnec4eqjrp" path="res://ai/tasks/actions/look_towards.gd" id="2_arivi"]
-[ext_resource type="Script" path="res://ai/tasks/actions/call_method_of.gd" id="4_34tfo"]
+[ext_resource type="Script" uid="uid://cmqowsjtwo38o" path="res://ai/tasks/actions/damage_closest_player_in_sight.gd" id="4_3nete"]
 [ext_resource type="Script" uid="uid://3d33dcfq3uw4" path="res://ai/tasks/conditions/is_in_melee_range_to.gd" id="5_7bile"]
 [ext_resource type="Script" uid="uid://jxy11re6at74" path="res://ai/tasks/actions/set_navigation_target_to.gd" id="5_arivi"]
-[ext_resource type="Script" path="res://ai/tasks/waits/var_wait.gd" id="6_3nete"]
+[ext_resource type="Script" uid="uid://bwhj6nulww5le" path="res://ai/tasks/waits/var_wait.gd" id="6_3nete"]
 [ext_resource type="Script" uid="uid://lc2iu3wx8ed2" path="res://ai/tasks/cooldowns/var_cooldown.gd" id="6_7bile"]
 [ext_resource type="Script" uid="uid://b5d2pcw44d0cg" path="res://ai/tasks/actions/navigate_to_target_position.gd" id="6_arivi"]
 
@@ -22,17 +22,12 @@ target = &"position_of_closest_player_in_sight"
 script = ExtResource("5_7bile")
 target = &"position_of_closest_player_in_sight"
 
-[sub_resource type="BTComment" id="BTComment_arivi"]
-custom_name = "this is where the attack logic is supposed to be; replace the comment or add the attack logic besides it"
-
-[sub_resource type="BTAction" id="BTAction_m2x11"]
-script = ExtResource("4_34tfo")
-target = &""
-method = &""
-arg = 0
+[sub_resource type="BTAction" id="BTAction_x1kv1"]
+script = ExtResource("4_3nete")
+damage_amount = 1
 
 [sub_resource type="BTCooldown" id="BTCooldown_3nete"]
-children = [SubResource("BTComment_arivi"), SubResource("BTAction_m2x11")]
+children = [SubResource("BTAction_x1kv1")]
 script = ExtResource("6_7bile")
 actual_duration = &"melee_cooldown_duration"
 
