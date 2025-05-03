@@ -7,6 +7,7 @@ class_name Player
 @onready var sword_hitbox = $Camera/HandPivot/HandTwo1/sword_1/SwordHitbox
 @onready var hand1 = $Camera/HandPivot/Hand
 @onready var hand2 = $Camera/HandPivot/HandTwo1
+@onready var inventory_ui = $InventoryUI
 
 
 const MAX_HP = 50
@@ -27,6 +28,7 @@ func _ready() -> void:
 	Utils.update_player_group(get_tree())
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hp = MAX_HP
+	global.set_player_reference(self)
 
 func _exit_tree() -> void:
 	remove_from_group("players")
@@ -77,6 +79,10 @@ func _process(_delta: float) -> void:
 		else:
 			anim_player.play("TertiaryAttack2")
 		dagger_hitbox.monitoring = true
+		
+	if Input.is_action_just_pressed("inventory"):
+		inventory_ui.visible = !inventory_ui.visible
+		get_tree().paused = !get_tree().paused
 
 
 func _physics_process(delta: float) -> void:
@@ -133,3 +139,6 @@ func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 		can_attack = false 
 		# change this so smth calculated
 		body.take_damage(5)
+
+func _on_Item_picked_up(item_data):
+	global.add_item(item_data)
