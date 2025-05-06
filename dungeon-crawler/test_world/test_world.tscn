@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwg14yq1omgle"]
+[gd_scene load_steps=13 format=3 uid="uid://cwg14yq1omgle"]
 
 [ext_resource type="PackedScene" uid="uid://c470ocohyxrie" path="res://player/player.tscn" id="1_6bak2"]
 [ext_resource type="PackedScene" uid="uid://c258rt3ce085l" path="res://test_world/map.blend" id="3_6bak2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://clfgfp1d8s4b7" path="res://enemy/enemy_spawn_timer.gd" id="5_kaadm"]
 [ext_resource type="PackedScene" uid="uid://casbuj58mugye" path="res://enemy/enemy_variations/enemy_1.tscn" id="6_7cb7q"]
 [ext_resource type="PackedScene" uid="uid://4qwc4d518cyr" path="res://enemy/enemy_variations/enemy_2.tscn" id="7_cen2t"]
+[ext_resource type="Shader" uid="uid://dvyrxduhub5cf" path="res://shaders/crt.gdshader" id="7_kaadm"]
 
 [sub_resource type="Environment" id="Environment_l7fxr"]
 background_mode = 1
@@ -24,6 +25,30 @@ albedo_color = Color(0.235779, 0.182745, 0.13896, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_l7fxr"]
 material = SubResource("StandardMaterial3D_l7fxr")
 size = Vector2(200, 120)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cb7q"]
+shader = ExtResource("7_kaadm")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.249
+shader_parameter/scanlines_width = 0.177
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(8000, 6000)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 3.0
+shader_parameter/roll_size = 38.202
+shader_parameter/roll_variation = 1.745
+shader_parameter/distort_intensity = 0.015
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 2.045
+shader_parameter/static_noise_intensity = 0.02
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.61
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 1.0
 
 [node name="TestWorld" type="Node3D"]
 
@@ -161,5 +186,13 @@ omni_attenuation = 0.0
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.999986, -0.00527088, 0, 0.00527088, -0.999986, 0, 0, 0, 1, -24.9647, 19.9023, 3.46127)
 mesh = SubResource("PlaneMesh_l7fxr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CRTShader" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_7cb7q")
+offset_right = 320.0
+offset_bottom = 240.0
+mouse_filter = 2
 
 [editable path="NavigationRegion3D/map"]
