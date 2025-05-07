@@ -25,9 +25,11 @@ func _on_inventory_updated():
 
 	var i = 0
 	for item_data in global.inventory:
-		if i >= slots.size():
-			break
+		if item_data == null:
+			continue  # skip bad item
 		var quantity = global.inventory[item_data]
+		if quantity <= 0:
+			continue
 		slots[i].set_item(item_data, quantity)
 		i += 1
 

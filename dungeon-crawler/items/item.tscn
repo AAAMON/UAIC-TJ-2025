@@ -13,7 +13,7 @@ quantity = 1
 type = "Consumable"
 description = "+30 XP"
 is_stackable = true
-max_stack = 99
+max_stack = 1
 metadata/_custom_type_script = "uid://dexjadqgvta4h"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ttk8k"]

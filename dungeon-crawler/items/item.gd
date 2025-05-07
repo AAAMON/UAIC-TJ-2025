@@ -8,6 +8,8 @@ extends Area3D
 @onready var icon: TextureRect = $TextureRect
 
 var player_in_range = false
+var can_be_picked_up := false
+var dropped := false
 
 signal picked_up(item_data)
 
@@ -15,7 +17,7 @@ func _ready():
 	# Apply icon texture to the mesh if available
 	if item_data and item_data.texture:
 		var mat = mesh.get_active_material(0)
-		if mat and mat is StandardMaterial3D:
+		if mat and 	mat is StandardMaterial3D:
 			var mat_instance = mat.duplicate()
 			mat_instance.albedo_texture = item_data.texture
 			mesh.set_surface_override_material(0, mat_instance)
@@ -28,11 +30,18 @@ func _ready():
 	despawn_timer.one_shot = true
 	despawn_timer.start()
 	despawn_timer.timeout.connect(_on_Timer_timeout)
+	
+	if dropped:
+		await get_tree().create_timer(2).timeout
+	can_be_picked_up = true
+
 
 	# Connect body_entered signal to handle pickup
 #	connect("body_entered", Callable(self, "_on_body_entered"))
 
 func _on_body_entered(body):
+	if not can_be_picked_up:
+		return
 	if body.name == "Player":
 		emit_signal("picked_up", item_data)
 		global.add_item(item_data)
