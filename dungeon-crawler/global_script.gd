@@ -32,6 +32,7 @@ func remove_item(item_type, item_effect):
 			inventory_updated.emit()
 			return true
 	return false
+	
 
 func increase_inventory_size():
 	inventory_updated.emit()
@@ -51,6 +52,9 @@ func remove_from_inventory(item: ItemData, remove_stack: bool=true):
 		inventory.erase(item)
 	else:
 		inventory[item] -= 1
+	inventory_updated.emit()
+
+	
 
 func equip_weapon(item: ItemData):
 	equipped_weapon = item

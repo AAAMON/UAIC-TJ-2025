@@ -477,18 +477,26 @@ color = Color(0.210956, 0.239038, 0.218139, 1)
 
 [node name="Label" type="Label" parent="InventoryUI/ColorRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -37.5
-offset_top = 50.0
-offset_right = 37.5
-offset_bottom = 73.0
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -98.5
+offset_right = 58.0
+offset_bottom = -63.5
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
 text = "Inventory"
 
 [node name="Inventory_UI" parent="InventoryUI/ColorRect" instance=ExtResource("5_qjkh3")]
+layout_mode = 1
+offset_left = 18.0
+offset_top = 76.0
+offset_right = 58.0
+offset_bottom = 116.0
 
 [connection signal="body_entered" from="Camera/HandPivot/Hand/Dagger/DaggerHitbox" to="." method="_on_dagger_hitbox_body_entered"]
 [connection signal="body_entered" from="Camera/HandPivot/HandTwo1/sword_1/SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]

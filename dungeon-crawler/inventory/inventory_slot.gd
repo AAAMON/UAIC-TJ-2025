@@ -2,23 +2,22 @@ extends Control
 
 @onready var icon = $InnerBorder/ItemIcon
 @onready var quantity_label = $InnerBorder/ItemQuantity
-@onready var details_panel = $DetailsPanel
+@onready var details_panel = $Details
 @onready var item_name = $DetailsPanel/ItemName
 @onready var item_type = $DetailsPanel/ItemType
 @onready var item_effect = $DetailsPanel/ItemEffect
-@onready var usage_panel = $UsagePanel
+@onready var usage_panel = $Usage
 
 var item = null
 
 func _on_item_button_pressed() -> void:
 	if item != null:
 		usage_panel.visible = !usage_panel.visible
-	pass # Replace with function body.
 
 
 func _on_item_button_mouse_entered() -> void:
 	if item != null:
-		usage_panel.visibile = false
+		usage_panel.visible = false
 		details_panel.visible = true
 
 

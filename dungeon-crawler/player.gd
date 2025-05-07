@@ -82,6 +82,10 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("inventory"):
 		inventory_ui.visible = !inventory_ui.visible
+		if inventory_ui.visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().paused = !get_tree().paused
 
 
