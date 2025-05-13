@@ -8,6 +8,8 @@ class_name Player
 @onready var hand1 = $Camera/HandPivot/Hand
 @onready var hand2 = $Camera/HandPivot/HandTwo1
 @onready var inventory_ui = $InventoryUI
+@onready var crafting_ui = $CraftUI
+@onready var game_log = $LogUI/RichTextLabel
 
 
 const MAX_HP = 50
@@ -87,6 +89,14 @@ func _process(_delta: float) -> void:
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().paused = !get_tree().paused
+	
+	if Input.is_action_just_pressed("crafting"):
+		crafting_ui.visible = !crafting_ui.visible
+		if crafting_ui.visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		get_tree().paused = !get_tree().paused
 
 
 func _physics_process(delta: float) -> void:
@@ -125,7 +135,9 @@ func _on_dagger_hitbox_body_entered(body: Node3D) -> void:
 		body.take_damage(2)
 		
 func take_damage(amount: int) -> void:
-	print("Player took ", amount, " damage!")
+	var strr = "You took " + str(amount) + " damage!"
+	print(strr)
+	game_log.add_log_line(strr)
 	hp = hp - amount
 	if hp <= 0:
 		die() 
@@ -146,3 +158,4 @@ func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 
 func _on_Item_picked_up(item_data):
 	global.add_item(item_data)
+	game_log.add_log_line("You took ", item_data.name, " damage!")

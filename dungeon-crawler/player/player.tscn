@@ -1,10 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://c470ocohyxrie"]
+[gd_scene load_steps=23 format=3 uid="uid://c470ocohyxrie"]
 
 [ext_resource type="Script" uid="uid://ypw5sf4d8hiq" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://du456exwxm7tu" path="res://player/models/hand_1.blend" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://bfcxlq3a0625l" path="res://player/models/dagger_1.blend" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://bjsh0ljuf36wh" path="res://player/models/sword_1.blend" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://dcx358rq3tl7y" path="res://inventory/inventory.tscn" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://bxdnqs82ospu6" path="res://player/rich_text_label.gd" id="6_g6k8r"]
+[ext_resource type="Texture2D" uid="uid://cydef34hpfjv5" path="res://items/item.png" id="7_boad6"]
+[ext_resource type="PackedScene" uid="uid://beyd6137agpmi" path="res://inventory/recipe.tscn" id="7_rgyib"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 height = 2.08099
@@ -415,6 +418,9 @@ _data = {
 &"TertiaryAttack2": SubResource("Animation_2ieo8")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_boad6"]
+font_size = 7
+
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 process_mode = 3
 script = ExtResource("1_4flbx")
@@ -497,6 +503,105 @@ offset_left = 18.0
 offset_top = 76.0
 offset_right = 58.0
 offset_bottom = 116.0
+
+[node name="LogUI" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LogUI"]
+offset_left = 11.0
+offset_top = 158.0
+offset_right = 120.0
+offset_bottom = 229.0
+theme_override_font_sizes/normal_font_size = 7
+text = "sdfsdfsf"
+fit_content = true
+scroll_following = true
+script = ExtResource("6_g6k8r")
+
+[node name="CraftUI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CraftUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.210956, 0.239038, 0.218139, 1)
+
+[node name="Label" type="Label" parent="CraftUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -98.5
+offset_right = 58.0
+offset_bottom = -63.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Crafting"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CraftUI"]
+offset_left = 9.0
+offset_top = 69.0
+offset_right = 139.0
+offset_bottom = 228.0
+
+[node name="Recipe" parent="CraftUI/VBoxContainer" instance=ExtResource("7_rgyib")]
+layout_mode = 2
+
+[node name="CraftButton" type="Button" parent="CraftUI"]
+offset_left = 269.0
+offset_top = 143.0
+offset_right = 300.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 8
+disabled = true
+text = "Craft"
+
+[node name="ItemPreview" type="ColorRect" parent="CraftUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 149.0
+offset_top = 69.0
+offset_right = -74.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0955092, 0.103579, 0.0855207, 1)
+
+[node name="InnerBorder" type="ColorRect" parent="CraftUI/ItemPreview"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -43.5
+offset_right = 40.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.450648, 0.450648, 0.450648, 1)
+
+[node name="ItemIcon" type="Sprite2D" parent="CraftUI/ItemPreview/InnerBorder"]
+position = Vector2(40, 44)
+scale = Vector2(0.0236429, 0.0236429)
+texture = ExtResource("7_boad6")
+
+[node name="ItemDescription" type="Label" parent="CraftUI"]
+offset_left = 259.0
+offset_top = 71.0
+offset_right = 311.0
+offset_bottom = 120.0
+text = "Select a recipe."
+label_settings = SubResource("LabelSettings_boad6")
+autowrap_mode = 2
 
 [connection signal="body_entered" from="Camera/HandPivot/Hand/Dagger/DaggerHitbox" to="." method="_on_dagger_hitbox_body_entered"]
 [connection signal="body_entered" from="Camera/HandPivot/HandTwo1/sword_1/SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]
