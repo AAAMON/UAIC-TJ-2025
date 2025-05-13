@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://4qwc4d518cyr"]
+[gd_scene load_steps=7 format=4 uid="uid://4qwc4d518cyr"]
 
 [ext_resource type="PackedScene" uid="uid://dlxlr7368qhjs" path="res://enemy/enemy.tscn" id="1_514le"]
+[ext_resource type="PackedScene" uid="uid://dnve5rv38dtou" path="res://items/item_varations/item_enemy_2.tscn" id="2_jpyd3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g87y8"]
 resource_name = "BaseMat"
@@ -48,6 +49,7 @@ height = 4.59221
 
 [node name="Enemy" instance=ExtResource("1_514le")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.318, 0)
+drop_item = ExtResource("2_jpyd3")
 
 [node name="Mesh" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
 transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, 0, 0)

@@ -6,6 +6,9 @@ class_name Enemy
 @onready var state_machine := $"State Machine"
 
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wandering_max_radius := 10.0
+const ENEMY_1_DROP = preload("res://items/item_varations/item_enemy_1.tscn")
+const ENEMY_2_DROP = preload("res://items/item_varations/item_enemy_2.tscn")
+
 
 @export var max_hp := 10
 var hp := max_hp
@@ -37,6 +40,11 @@ func _ready():
 		await NavigationServer3D.map_changed
 	add_to_group("enemies")
 	state_machine.set_active(true)
+	if name.to_lower().contains("enemy"):
+		drop_item = ENEMY_1_DROP
+	elif name.to_lower().contains("CharacterBody3D"):
+		drop_item = ENEMY_2_DROP
+	print("READY - enemy name:", name)
 
 func _exit_tree() -> void:
 	remove_from_group("enemies")
