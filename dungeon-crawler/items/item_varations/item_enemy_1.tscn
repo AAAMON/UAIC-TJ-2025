@@ -77,6 +77,8 @@ metadata/extras = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false

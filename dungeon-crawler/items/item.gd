@@ -17,10 +17,17 @@ func _ready():
 	# Apply icon texture to the mesh if available
 	if item_data and item_data.texture:
 		var mat = mesh.get_active_material(0)
-		if mat and 	mat is StandardMaterial3D:
+		if mat and mat is StandardMaterial3D:
 			var mat_instance = mat.duplicate()
 			mat_instance.albedo_texture = item_data.texture
+
+			# Enable glow
+			mat_instance.emission_enabled = true
+			mat_instance.emission = Color(0.4, 0.6, 1.0)  * 0.1  # White glow, adjust intensity
+			mat_instance.emission_texture = item_data.texture  # optional, use same texture
+
 			mesh.set_surface_override_material(0, mat_instance)
+			
 
 		# Assign the icon in the UI
 		icon.texture = item_data.texture
@@ -30,7 +37,9 @@ func _ready():
 	despawn_timer.one_shot = true
 	despawn_timer.start()
 	despawn_timer.timeout.connect(_on_Timer_timeout)
-	
+
+	await get_tree().create_timer(0.5).timeout
+
 	if dropped:
 		await get_tree().create_timer(2).timeout
 	can_be_picked_up = true
@@ -45,6 +54,7 @@ func _on_body_entered(body):
 	if body.name == "Player":
 		emit_signal("picked_up", item_data)
 		global.add_item(item_data)
+		despawn_timer.stop()
 		queue_free()
 
 func _on_Timer_timeout():
@@ -53,3 +63,7 @@ func _on_Timer_timeout():
 func _on_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		player_in_range = false
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

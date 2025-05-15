@@ -17,7 +17,7 @@ max_stack = 99
 metadata/_custom_type_script = "uid://dexjadqgvta4h"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rrtlf"]
-size = Vector3(2.09985, 1.29004, 3.29216)
+size = Vector3(2.09985, 1.41385, 3.3112)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1hqe"]
 resource_name = "Material.001"
@@ -61,15 +61,15 @@ metadata/extras = {
 }
 
 [node name="Area3D" type="Area3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_rhpyx")
 item_data = SubResource("Resource_4b1d7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00256348, -0.14502, 0.476265)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00256348, -0.0390247, 0.210559)
 shape = SubResource("BoxShape3D_rrtlf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_rwrdq")
 skeleton = NodePath("")
 metadata/extras = {
@@ -77,6 +77,8 @@ metadata/extras = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -86,3 +88,4 @@ texture = ExtResource("3_icq1j")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -32,6 +32,8 @@ shape = SubResource("SphereShape3D_ttk8k")
 mesh = SubResource("SphereMesh_kg5e7")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
