@@ -96,8 +96,8 @@ func die():
 		var selected_item = drop_items[index]
 		if selected_item:
 			var dropped = selected_item.instantiate()
-			dropped.global_position = global_position
 			get_parent().add_child(dropped)
+			dropped.set_deferred("global_position", global_position)
 
 	queue_free()
 

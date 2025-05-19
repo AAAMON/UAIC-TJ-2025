@@ -15,5 +15,5 @@ func _ready():
 			randf_range(-spawn_radius, spawn_radius)
 		)
 
-		item_instance.global_position = global_position + offset
-		get_tree().current_scene.add_child(item_instance)
+		get_tree().current_scene.add_child.call_deferred(item_instance)
+		item_instance.set_deferred("global_position", global_position + offset)

@@ -73,8 +73,8 @@ func _on_drop_button_pressed() -> void:
 		var dropped = load("res://items/item.tscn").instantiate()
 		dropped.item_data = item
 		dropped.dropped = true
-		dropped.global_position = global.player_node.global_position + Vector3(1, 1, 0)
 		get_tree().current_scene.add_child(dropped)
+		dropped.global_position = global.player_node.global_position + Vector3(1, 1, 0)
 	
 	global.remove_from_inventory(item, false)
 	usage_panel.visible = false
