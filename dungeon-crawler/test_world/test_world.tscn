@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwg14yq1omgle"]
+[gd_scene load_steps=13 format=3 uid="uid://cwg14yq1omgle"]
 
 [ext_resource type="PackedScene" uid="uid://c470ocohyxrie" path="res://player/player.tscn" id="1_6bak2"]
 [ext_resource type="PackedScene" uid="uid://c258rt3ce085l" path="res://test_world/map.blend" id="3_6bak2"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://casbuj58mugye" path="res://enemy/enemy_variations/enemy_1.tscn" id="6_7cb7q"]
 [ext_resource type="PackedScene" uid="uid://4qwc4d518cyr" path="res://enemy/enemy_variations/enemy_2.tscn" id="7_cen2t"]
 [ext_resource type="Shader" uid="uid://dvyrxduhub5cf" path="res://shaders/crt.gdshader" id="7_kaadm"]
-[ext_resource type="Script" uid="uid://dyxr43rrfoft2" path="res://test_world/item_spawner.gd" id="8_cen2t"]
-[ext_resource type="PackedScene" uid="uid://cpi8s1vsyeyex" path="res://items/item_varations/item_env_1.tscn" id="9_kbtvp"]
 
 [sub_resource type="Environment" id="Environment_l7fxr"]
 background_mode = 1
@@ -201,10 +199,5 @@ material = SubResource("ShaderMaterial_7cb7q")
 offset_right = 320.0
 offset_bottom = 240.0
 mouse_filter = 2
-
-[node name="ItemSpawner" type="Node3D" parent="."]
-script = ExtResource("8_cen2t")
-item_scene = ExtResource("9_kbtvp")
-number_of_items = 10
 
 [editable path="NavigationRegion3D/map"]
